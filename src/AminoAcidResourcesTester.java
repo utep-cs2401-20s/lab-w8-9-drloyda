@@ -58,5 +58,10 @@ class AminoAcidResourcesTester{
       }
     }
   }
+  @Test
+  public void AminoAcidLL(){
+    String codon = "GCC";
+    AminoAcidLL head = new AminoAcidLL(codon);
+  }
 
 }

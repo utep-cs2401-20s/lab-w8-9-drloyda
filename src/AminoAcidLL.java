@@ -8,13 +8,23 @@ class AminoAcidLL{
 
   }
 
+  public static void main(String[] args) {
+    String codon = "GCC";
+    AminoAcidLL head = new AminoAcidLL(codon);
+
+  }
+
 
   /********************************************************************************************/
   /* Creates a new node, with a given amino acid/codon 
    * pair and increments the codon counter for that codon.
    * NOTE: Does not check for repeats!! */
   AminoAcidLL(String inCodon){
-  
+    aminoAcid = AminoAcidResources.getAminoAcidFromCodon(inCodon);
+    codons = AminoAcidResources.getCodonListForAminoAcid(aminoAcid);
+
+
+
   }
 
   /********************************************************************************************/
