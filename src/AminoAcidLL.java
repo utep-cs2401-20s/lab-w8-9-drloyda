@@ -9,8 +9,16 @@ class AminoAcidLL{
   }
 
   public static void main(String[] args) {
-    String codon = "GCC";
-    AminoAcidLL head = new AminoAcidLL(codon);
+    String sequence = "GCUACGGAGCUUCGGAGCUAG";
+
+//    print(createFromRNASequence(sequence));
+//    System.out.println(createFromRNASequence(sequence));
+
+    String codon = "";
+    for(int i = 0; i < sequence.length() /3; i++) {
+      codon = sequence.substring(3 * i, ((3 * i) + 3));
+      System.out.println(AminoAcidResources.getAminoAcidFromCodon(codon));
+    }
 
   }
 
@@ -22,6 +30,8 @@ class AminoAcidLL{
   AminoAcidLL(String inCodon){
     aminoAcid = AminoAcidResources.getAminoAcidFromCodon(inCodon);
     codons = AminoAcidResources.getCodonListForAminoAcid(aminoAcid);
+    counts = incrCodon();
+    this.next = null;
 
 
 
@@ -34,7 +44,24 @@ class AminoAcidLL{
    * If there is no next node, add a new node to the list that would contain the codon. 
    */
   private void addCodon(String inCodon){
-  
+    AminoAcidLL aminoAcid = new AminoAcidLL(inCodon);
+    if(aminoAcid.equals(AminoAcidResources.getAminoAcidFromCodon(inCodon))){
+      //incrCodons(incodon);
+    }
+
+    if(next != null){
+      next.addCodon(inCodon);
+    }else{
+      next = new AminoAcidLL(inCodon);
+    }
+  }
+  public int[] incrCodon(String inCodon){
+    for(int i = 0; i < codons.length; i ++){
+      if(inCodon == codons[i]){
+        counts[i]++;
+      }
+    }
+    return counts;
   }
 
 
@@ -101,8 +128,30 @@ class AminoAcidLL{
   /********************************************************************************************/
   /* Static method for generating a linked list from an RNA sequence */
   public static AminoAcidLL createFromRNASequence(String inSequence){
-    return null;
+    String firstCodon = inSequence.substring(0,2);
+    AminoAcidLL head = new AminoAcidLL(firstCodon);
+    AminoAcidLL iter = new AminoAcidLL();
+    iter = head;
+    String codon = "";
+
+    for(int i = 1; i < inSequence.length() /3; i++) {
+      codon = inSequence.substring(3 * i, ((3 * i) + 3));
+      AminoAcidResources.getAminoAcidFromCodon(codon);
+
+
+    }
+
+    return iter;
   }
+  /*********************************************************************************************/
+//  public static void print(AminoAcidLL head){
+//    AminoAcidLL iter = new AminoAcidLL();
+//    iter = head;
+//    while(iter != null){
+//      System.out.println(AminoAcidResources.getAminoAcidFromCodon());
+//      iter = iter.next;
+//    }
+//  }
 
 
   /********************************************************************************************/
