@@ -58,13 +58,5 @@ class AminoAcidResourcesTester{
       }
     }
   }
-  @Test
-  public void AminoAcidLL(){
-    String codon = "GCC";
-    char expect = 'A';
-
-    AminoAcidLL head = new AminoAcidLL(codon);
-    assertEquals(expect, AminoAcidResources.getAminoAcidFromCodon(codon));
-  }
 
 }

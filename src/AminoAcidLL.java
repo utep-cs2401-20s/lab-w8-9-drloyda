@@ -9,16 +9,7 @@ class AminoAcidLL{
   }
 
   public static void main(String[] args) {
-    String sequence = "GCUACGGAGCUUCGGAGCUAG";
 
-//    print(createFromRNASequence(sequence));
-//    System.out.println(createFromRNASequence(sequence));
-
-    String codon = "";
-    for(int i = 0; i < sequence.length() /3; i++) {
-      codon = sequence.substring(3 * i, ((3 * i) + 3));
-      System.out.println(AminoAcidResources.getAminoAcidFromCodon(codon));
-    }
 
   }
 
@@ -30,7 +21,7 @@ class AminoAcidLL{
   AminoAcidLL(String inCodon){
     aminoAcid = AminoAcidResources.getAminoAcidFromCodon(inCodon);
     codons = AminoAcidResources.getCodonListForAminoAcid(aminoAcid);
-    counts = incrCodon();
+    counts = new int [4];
     this.next = null;
 
 
@@ -44,26 +35,26 @@ class AminoAcidLL{
    * If there is no next node, add a new node to the list that would contain the codon. 
    */
   private void addCodon(String inCodon){
-    AminoAcidLL aminoAcid = new AminoAcidLL(inCodon);
-    if(aminoAcid.equals(AminoAcidResources.getAminoAcidFromCodon(inCodon))){
-      //incrCodons(incodon);
-    }
 
-    if(next != null){
-      next.addCodon(inCodon);
+    if(AminoAcidResources.getAminoAcidFromCodon(inCodon) == this.aminoAcid){
+       incrCodon(inCodon, this.codons);
+    }
+    else if(this.next != null){
+      this.next.addCodon(inCodon);
     }else{
-      next = new AminoAcidLL(inCodon);
+      this.next = new AminoAcidLL(inCodon);
     }
   }
-  public int[] incrCodon(String inCodon){
-    for(int i = 0; i < codons.length; i ++){
-      if(inCodon == codons[i]){
+  /********************************************************************************************/
+
+  public int[] incrCodon(String inCodon, String[] codonList){
+    for(int i = 0; i < codonList.length; i ++){
+      if(inCodon.equals(codonList[i])){
         counts[i]++;
       }
     }
     return counts;
   }
-
 
   /********************************************************************************************/
   /* Shortcut to find the total number of instances of this amino acid */
@@ -128,17 +119,28 @@ class AminoAcidLL{
   /********************************************************************************************/
   /* Static method for generating a linked list from an RNA sequence */
   public static AminoAcidLL createFromRNASequence(String inSequence){
-    String firstCodon = inSequence.substring(0,2);
+    String firstCodon = inSequence.substring(0,3);
     AminoAcidLL head = new AminoAcidLL(firstCodon);
-    AminoAcidLL iter = new AminoAcidLL();
-    iter = head;
+    AminoAcidLL iter = head;
     String codon = "";
 
-    for(int i = 1; i < inSequence.length() /3; i++) {
+    for(int i = 0; i < inSequence.length() /3; i++) {
       codon = inSequence.substring(3 * i, ((3 * i) + 3));
-      AminoAcidResources.getAminoAcidFromCodon(codon);
+      iter.addCodon(codon);
+    }
 
-
+    while(iter!= null){
+      System.out.print(iter.aminoAcid);
+      iter =iter.next;
+    }
+    iter = head;
+    System.out.println();
+    for (int i = 0; i <iter.codons.length ; i++) {
+      System.out.print(iter.codons[i] + ",");
+    }
+    System.out.println();
+    for (int i = 0; i <iter.counts.length ; i++) {
+      System.out.print(" " + iter.counts[i] + " ");
     }
 
     return iter;
