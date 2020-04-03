@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AminoAcidLLTester {
+public class AminoAcidLLTester extends AminoAcidLL{
     @Test
     public void AminoAcidLL(){
         String codon = "GCC";
@@ -14,10 +14,20 @@ public class AminoAcidLLTester {
     }
     @Test
     public void AminoAcidLL2(){
-        String sequence = "GCUGCCACGGAGCUUCGGAGCGAG";
-        AminoAcidLL test = new AminoAcidLL();
+        String sequence = "UCGUGCGAG";
+        AminoAcidLL test = createFromRNASequence(sequence);
+        sort(test);
+        System.out.println();
+        System.out.println(test.isSorted());
 
-        AminoAcidLL.createFromRNASequence(sequence);
+
+//        System.out.println(test.aminoAcidList());
+//        for (int i = 0; i < test.aminoAcidCounts().length; i++) {
+//            System.out.print(test.aminoAcidCounts()[i]);
+//        }
+
+
+
 
         //assertEquals(result,AminoAcidLL.createFromRNASequence(sequence));
 
