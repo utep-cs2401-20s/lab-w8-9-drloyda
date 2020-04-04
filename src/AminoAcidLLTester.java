@@ -124,20 +124,37 @@ public class AminoAcidLLTester extends AminoAcidLL{
     //TESTCASE 9;
     @Test
     public void AminoAcidCompareTest(){
-        //The sequence has three G aminoAcids, meaning three counts for it
-        String sequence = "GGGGGAGAGGCUCGG";
+        //the This list that contains one extra G aminoAcid
+        String sequence = "GGGGGAGAGGCUCGGA"; //{G,G,E,A,R,
         AminoAcidLL test = createFromRNASequence(sequence);
+        sort(test);
 
-        String sequence2 = "GGAGAGGCUCGG";
+        //the inList that will compare to the this list
+        String sequence2 = "GGAGAGGCUCGG";//{G,E,A,R
         AminoAcidLL test2 = createFromRNASequence(sequence);
-        //what i expect
-        int[] result = {3};
+        sort(test2);
 
-        System.out.println(aminoAcidCompare(test2));
+        assertEquals(1 ,test.aminoAcidCompare(test2));
+        //The test passed, meaining that the method was able to compare
+        //and subtract the aminoAcids of the two lists
+    }
+    /************************************************************************/
+    //TESTCASE 9;
+    @Test
+    public void codonCCompareTest(){
+        //incomplete
+        //the This list that contains one extra G aminoAcid
+        String sequence = "GGGGGAGAGGCUCGGA"; //{G,G,E,A,R,
+        AminoAcidLL test = createFromRNASequence(sequence);
+        sort(test);
 
-        //assertArrayEquals(result, test.aminoAcidCounts());
-        //the test passed, meaning it was able to add up all
-        //the counts for the aminoAcid
+        //the inList that will compare to the this list
+        String sequence2 = "GGAGAGGCUCGG";//{G,E,A,R
+        AminoAcidLL test2 = createFromRNASequence(sequence);
+        sort(test2);
+
+        assertEquals(1 ,test.codonCompare(test2));
+        
     }
 
 

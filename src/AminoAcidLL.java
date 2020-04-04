@@ -87,32 +87,53 @@ class AminoAcidLL{
   /* Recursive method that finds the differences in **Amino Acid** counts. 
    * the list *must* be sorted to use this method */
   public int aminoAcidCompare(AminoAcidLL inList){
+
     int comp;
-    //if(this.isSorted() && inList.isSorted()){
+    if(inList.next == null){
+      return totalCount();
+    }
+    if(next == null){
+      return this.aminoAcidCompare(inList.next);
+    }
 
-      if(this.aminoAcid == inList.aminoAcid){
-        if(this.totalCount() < inList.totalCount()){
-          comp = totalDiff(inList) *-1;
-          next.aminoAcidCompare(inList.next);
+    //if the nodes are matching
+    if(this.aminoAcid == inList.aminoAcid){
+      if(this.totalCount() < inList.totalCount()){
+        next.aminoAcidCompare(inList.next);
+        return comp = totalDiff(inList) *-1;
 
-        }else {
-          comp = totalDiff(inList);
-          next.aminoAcidCompare(inList.next);
-        }
+      }else {
+        next.aminoAcidCompare(inList.next);
+        return comp = totalDiff(inList.next);
       }
-    //}//else{
-      //sort(this);
-     // sort(inList);
-      //aminoAcidCompare(inList);
-    //}
+    }
 
-    return totalDiff(inList);
+    return 0;
   }
 
   /********************************************************************************************/
   /* Same ad above, but counts the codon usage differences
    * Must be sorted. */
   public int codonCompare(AminoAcidLL inList){
+    int comp;
+    if(inList.next == null){
+      return totalCount();
+    }
+    if(next == null){
+      return this.codonCompare(inList.next);
+    }
+
+    if(this.aminoAcid == inList.aminoAcid){
+      if(this.totalCount() < inList.totalCount()){
+        next.codonCompare(inList.next);
+        return comp = codonDiff(inList) *-1;
+
+      }else {
+        next.codonCompare(inList.next);
+        return comp = codonDiff(inList.next);
+      }
+    }
+
     return 0;
   }
 
