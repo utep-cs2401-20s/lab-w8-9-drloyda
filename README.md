@@ -2,7 +2,7 @@
 In this weeks lab we will work on the computer science concepts of Linked Lists and Sorting. 
 We will be doing this by introducing a common task in computational biology: RNA to Amino Acid translation. 
 Proteins are encoded in a 20 letter amino acid alphabet but when those proteins are encoded on the genome they are in a 4 letter alphabet. 
-To convert from RNA into Amino Acids your cells use a specific code to convert 3 RNA characters (called a codon) into a specific amino acid. 
+To convAert from RNA into Amino Acids your cells use a specific code to convert 3 RNA characters (called a codon) into a specific amino acid. 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/RNA-codons-aminoacids.svg/1024px-RNA-codons-aminoacids.svg.png)
 
 The codon to Amino Acid map is shown in the figure below. 
